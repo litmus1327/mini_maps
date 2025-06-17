@@ -2,9 +2,44 @@
 <html>
 <head>
   <title>Mini Map Lookup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+    img {
+      margin-top: 20px;
+      max-width: 80%;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Mini Map Lookup Tool</h1>
-  <p>This is the start of your GitHub Pages site.</p>
+  <h1>Mini Map Lookup Tool</h1>
+  <p>Enter Icon/Task Number:</p>
+  <input type="text" id="iconInput" placeholder="e.g., 1" />
+  <button onclick="lookupMap()">Show Mini Map</button>
+  <div id="result"></div>
+
+  <script>
+    function lookupMap() {
+      const iconNumber = document.getElementById("iconInput").value.trim();
+      if (iconNumber === "") {
+        alert("Please enter an icon/task number");
+        return;
+      }
+      const imageUrl = `McLarenFentonED/McLarenFentonED_Icon${iconNumber}.png`;
+      document.getElementById("result").innerHTML = `<img src="${imageUrl}" alt="Mini Map for Icon ${iconNumber}">`;
+    }
+  </script>
 </body>
 </html>
