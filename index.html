@@ -21,15 +21,6 @@
       max-width: 80%;
       border: 1px solid #ccc;
     }
-    pre {
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-      text-align: left;
-      max-width: 80%;
-      margin: 20px auto;
-      padding: 10px;
-      overflow-x: auto;
-    }
   </style>
 </head>
 <body>
@@ -38,9 +29,6 @@
   <input type="text" id="iconInput" placeholder="e.g., 1" />
   <button onclick="lookupMap()">Show Mini Map</button>
   <div id="result"></div>
-  
-  <h3>Debug Info</h3>
-  <pre id="debugOutput"></pre>
 
   <script>
     // Function to get URL parameter by name
@@ -51,7 +39,6 @@
 
     // Read the folder name from URL param "site"
     const folderName = getQueryParam("site");
-    document.getElementById("debugOutput").textContent = `Folder name from URL param "site":\n${folderName || "(none)"}`;
 
     function lookupMap() {
       const iconNumber = document.getElementById("iconInput").value.trim();
@@ -63,17 +50,11 @@
         alert("Site folder not specified in URL.");
         return;
       }
+      // Construct the path using the folder from URL param and simple icon filename
       const imageUrl = `${folderName}/${iconNumber}.png`;
-      
-      // Update debug output with the image URL
-      document.getElementById("debugOutput").textContent = 
-        `Folder name from URL param "site":\n${folderName}\n\n` +
-        `Trying to load image URL:\n${imageUrl}`;
 
       // Update the image display
-      document.getElementById("result").innerHTML = 
-        `<img src="${imageUrl}" alt="Mini Map for Icon ${iconNumber}" ` +
-        `onerror="this.onerror=null;this.src='';alert('Mini map not found for icon ' + iconNumber)"/>`;
+      document.getElementById("result").innerHTML = `<img src="${imageUrl}" alt="Mini Map for Icon ${iconNumber}" onerror="this.onerror=null;this.src='';alert('Mini map not found for icon ' + iconNumber)"/>`;
     }
   </script>
 </body>
