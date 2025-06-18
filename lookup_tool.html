@@ -1,0 +1,214 @@
+C:\Users\CODIFY\Desktop\Python Script>python extract_cropped_mini_maps.py
+Converting PDF pages to images...
+C:\Users\CODIFY\AppData\Local\Programs\Python\Python313\Lib\site-packages\PIL\Image.py:3442: DecompressionBombWarning: Image size (155520000 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+  warnings.warn(
+Processing Icon 1: image size = 2550x3300
+Saved McLarenFentonED_Icon1.png
+Processing Icon 2: image size = 2550x3300
+Saved McLarenFentonED_Icon2.png
+Processing Icon 3: image size = 2550x3300
+Saved McLarenFentonED_Icon3.png
+Processing Icon 4: image size = 2550x3300
+Saved McLarenFentonED_Icon4.png
+Processing Icon 5: image size = 2550x3300
+Saved McLarenFentonED_Icon5.png
+Processing Icon 6: image size = 2550x3300
+Saved McLarenFentonED_Icon6.png
+Processing Icon 7: image size = 14400x10800
+Saved McLarenFentonED_Icon7.png
+Processing Icon 8: image size = 14400x10800
+Saved McLarenFentonED_Icon8.png
+✅ All mini maps cropped and saved in McLarenFentonED_MiniMaps_Cropped
+
+C:\Users\CODIFY\Desktop\Python Script>pip install opencv-python
+Collecting opencv-python
+  Downloading opencv_python-4.11.0.86-cp37-abi3-win_amd64.whl.metadata (20 kB)
+Requirement already satisfied: numpy>=1.21.2 in c:\users\codify\appdata\local\programs\python\python313\lib\site-packages (from opencv-python) (2.3.0)
+Downloading opencv_python-4.11.0.86-cp37-abi3-win_amd64.whl (39.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 39.5/39.5 MB 55.8 MB/s eta 0:00:00
+Installing collected packages: opencv-python
+Successfully installed opencv-python-4.11.0.86
+
+C:\Users\CODIFY\Desktop\Python Script>import os
+'import' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>import cv2
+'import' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>import numpy as np
+'import' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>from pdf2image import convert_from_path
+'from' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>from PIL import Image
+'from' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script># INPUTS
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>pdf_path = "McLaren Fenton ED - Door Location Summary & Mini Maps 0513_25.pdf"
+'pdf_path' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>output_dir = "McLarenFentonED_MiniMaps_Final"
+'output_dir' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>poppler_path = r"C:\Users\CODIFY\Desktop\Python Script\poppler-24.08.0\bin"  # Actual Poppler bin path
+'poppler_path' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>if not os.path.exists(output_dir):
+The syntax of the command is incorrect.
+C:\Users\CODIFY\Desktop\Python Script>    os.makedirs(output_dir)
+'os.makedirs' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>print("Converting PDF pages to images...")
+Unable to initialize device PRN
+
+C:\Users\CODIFY\Desktop\Python Script>pages = convert_from_path(pdf_path, dpi=300, poppler_path=poppler_path)
+'pages' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script># Skip first page (informational)
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>for idx, page in enumerate(pages[1:], start=1):
+idx was unexpected at this time.
+
+C:\Users\CODIFY\Desktop\Python Script>    img_path = os.path.join(output_dir, f"temp_page_{idx}.png")
+'img_path' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    page.save(img_path)
+'page.save' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Read with OpenCV
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    cv_img = cv2.imread(img_path)
+'cv_img' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
+'gray' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Detect horizontal lines
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+'edges' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    lines = cv2.HoughLinesP(edges, 1, np.pi / 180, threshold=200, minLineLength=300, maxLineGap=10)
+'lines' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Find lowest horizontal line (separator line)
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    sep_y = None
+'sep_y' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    if lines is not None:
+is was unexpected at this time.
+
+C:\Users\CODIFY\Desktop\Python Script>        for line in lines:
+line was unexpected at this time.
+
+C:\Users\CODIFY\Desktop\Python Script>            x1, y1, x2, y2 = line[0]
+'x1' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>            if abs(y1 - y2) < 10:  # horizontal
+- was unexpected at this time.
+
+C:\Users\CODIFY\Desktop\Python Script>                y = (y1 + y2) // 2
+'y' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>                if sep_y is None or y > sep_y:
+is was unexpected at this time.
+
+C:\Users\CODIFY\Desktop\Python Script>                    sep_y = y
+'sep_y' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Crop region: right side and above separator
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    h, w, _ = cv_img.shape
+'h' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    x_start = int(w * 0.5)  # right half
+'x_start' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    y_end = sep_y - 5 if sep_y else h  # small buffer above separator
+'y_end' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    cropped = cv_img[0:y_end, x_start:w]
+'cropped' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Save result
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    out_name = f"McLarenFentonED_Icon{idx}.png"
+'out_name' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    out_path = os.path.join(output_dir, out_name)
+'out_path' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    cv2.imwrite(out_path, cropped)
+'cv2.imwrite' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    print(f"✅ Saved {out_name}")
+Unable to initialize device PRN
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>    # Cleanup temp
+'#' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>    os.remove(img_path)
+'os.remove' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\CODIFY\Desktop\Python Script>
+C:\Users\CODIFY\Desktop\Python Script>print(f"\n🎉 All mini maps cropped and saved in {output_dir}")
+Unable to initialize device PRN
+
+C:\Users\CODIFY\Desktop\Python Script>
