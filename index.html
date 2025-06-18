@@ -31,15 +31,32 @@
   <div id="result"></div>
 
   <script>
+    // Function to get URL parameter by name
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Read the folder name from URL param "site"
+    const folderName = getQueryParam("site");
+
     function lookupMap() {
       const iconNumber = document.getElementById("iconInput").value.trim();
       if (iconNumber === "") {
         alert("Please enter an icon/task number");
         return;
       }
-      const imageUrl = `McLarenFentonED/McLarenFentonED_Icon${iconNumber}.png`;
-      document.getElementById("result").innerHTML = `<img src="${imageUrl}" alt="Mini Map for Icon ${iconNumber}">`;
+      if (!folderName) {
+        alert("Site folder not specified in URL.");
+        return;
+      }
+      // Construct the path using the folder from URL param and simple icon filename
+      const imageUrl = `${folderName}/${iconNumber}.png`;
+
+      // Update the image display
+      document.getElementById("result").innerHTML = `<img src="${imageUrl}" alt="Mini Map for Icon ${iconNumber}" onerror="this.onerror=null;this.src='';alert('Mini map not found for icon ' + iconNumber)"/>`;
     }
   </script>
 </body>
 </html>
+
